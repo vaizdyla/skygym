@@ -1,0 +1,27 @@
+{
+  "name": "skygym",
+  "version": "1.0.0",
+  "description": "SkyGym gym RESTful API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vaizdyla/skygym.git"
+  },
+  "keywords": [
+    "node",
+    "restful",
+    "api"
+  ],
+  "author": "Marijus Šmiginas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vaizdyla/skygym/issues"
+  },
+  "homepage": "https://github.com/vaizdyla/skygym#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
