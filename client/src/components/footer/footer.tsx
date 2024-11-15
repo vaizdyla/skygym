@@ -5,11 +5,13 @@ import { FiPhoneCall } from 'react-icons/fi';
 import { FaFacebook, FaInstagramSquare, FaYoutube } from 'react-icons/fa';
 import { Gallery } from '../shared/gallery/gallery';
 
+import logo from '/assets/skygym-logo-28.png';
+
 export const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="min-h-[400px] bg-[url('./assets/fonas-poraste.jpg')]">
+    <footer className="min-h-[400px] bg-[url('/assets/fonas-poraste.jpg')]">
       <div className="container mx-auto p-10 flex flex-col py-10">
         <div className="grid grid-flow-col gap-3">
           <div className="flex flex-col gap-3">
@@ -68,12 +70,17 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto px-10">
-        <div className="flex gap-3 items-center border-t-[1px] py-2 border-gray-400">
-          <img src={'/assets/skygym-logo-28.png'} alt="SkyGym logo" />
-          <p className="text-sm text-gray-300">
-            &copy; {new Date().getFullYear()} SkyGym - {t('footerCopy')}
-          </p>
+      <div className="container mx-auto px-10 border-t-[1px] border-gray-400">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-3 py-2">
+            <img src={logo} alt="SkyGym logo footer" />
+            <p className="text-sm text-gray-300">
+              &copy; {new Date().getFullYear()} SkyGym - {t('footerCopy')}
+            </p>
+          </div>
+          <div className="text-sm text-gray-500">
+            <a href="/">Sukurė: Vaizdyla</a>
+          </div>
         </div>
       </div>
     </footer>
