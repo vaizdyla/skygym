@@ -6,6 +6,7 @@ import { FaFacebook, FaInstagramSquare, FaYoutube } from 'react-icons/fa';
 import { Gallery } from '../shared/gallery/gallery';
 
 import logo from '/assets/skygym-logo-28.png';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -75,11 +76,17 @@ export const Footer = () => {
           <div className="flex items-center gap-3 py-2">
             <img src={logo} alt="SkyGym logo footer" />
             <p className="text-sm text-gray-300">
-              &copy; {new Date().getFullYear()} SkyGym - {t('footerCopy')}
+              &copy; {new Date().getFullYear()} <Link to="/">SkyGym</Link> -{' '}
+              {t('footerCopy')}
             </p>
           </div>
           <div className="text-sm text-gray-500">
-            <a href="/">Sukurė: Vaizdyla</a>
+            <a
+              href="https://www.linkedin.com/in/marijus-smiginas/"
+              target="_blank"
+            >
+              Sukurė: Vaizdyla
+            </a>
           </div>
         </div>
       </div>

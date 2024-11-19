@@ -28,9 +28,47 @@ export const MainMenu = () => {
               </a>
             </div>
             {/** primary nav */}
-            <div className="flex items-center space-x-3">
-              <NavLink to="/">{t('titleHome')}</NavLink>
-              <NavLink to="/kontaktai">{t('titleContacts')}</NavLink>
+            <div className="flex items-center space-x-2 uppercase font-semibold text-xl">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? 'border border-slate-600 py-1 px-2 rounded-lg bg-slate-800'
+                    : 'hover:text-slate-100 border border-slate-900 hover:border-slate-600 rounded-lg py-1 px-2'
+                }
+                to="/"
+              >
+                {t('titleHome')}
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? 'border border-slate-600 py-1 px-2 rounded-lg bg-slate-800'
+                    : 'hover:text-slate-100 border border-slate-900 hover:border-slate-600 rounded-lg py-1 px-2'
+                }
+                to="kainos"
+              >
+                {t('titlePricelist')}
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? 'border border-slate-600 py-1 px-2 rounded-lg bg-slate-800'
+                    : 'hover:text-slate-100 border border-slate-900 hover:border-slate-600 rounded-lg py-1 px-2'
+                }
+                to="taisykles"
+              >
+                {t('titleToc')}
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? 'border border-slate-600 py-1 px-2 rounded-lg bg-slate-800'
+                    : 'hover:text-slate-100 border border-slate-900 hover:border-slate-600 rounded-lg py-1 px-2'
+                }
+                to="kontaktai"
+              >
+                {t('titleContacts')}
+              </NavLink>
             </div>
           </div>
           {/** secondary nav */}
@@ -47,12 +85,6 @@ export const MainMenu = () => {
         </div>
       </div>
       {/** mobile menu */}
-      {/* <div>
-        
-      </div>
-      <div>
-        
-      </div> */}
     </nav>
   );
 };
