@@ -10,6 +10,7 @@ import { HomePage } from './pages/home/home';
 import { ContactsPage } from './pages/contacts/contacts';
 import { PricelistPage } from './pages/pricelist/pricelist';
 import { TocPage } from './pages/toc/toc';
+import { LoginPage } from './pages/Login';
 import { NotFoundPage } from './pages/NotFound';
 
 // Admin pages
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
         <Route path="kainos" element={<PricelistPage />} />
         <Route path="taisykles" element={<TocPage />} />
         <Route path="kontaktai" element={<ContactsPage />} />
+        <Route path="prisijungimas" element={<LoginPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
       <Route path="/suvestine" element={<AdminLayout />}>

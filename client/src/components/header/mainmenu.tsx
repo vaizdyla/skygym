@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { LANGUAGES } from '../../constants/languages';
 import { useTranslation } from 'react-i18next';
 import logo from '/assets/skygym-logo-88.png';
@@ -73,7 +73,9 @@ export const MainMenu = () => {
           </div>
           {/** secondary nav */}
           <div className="flex items-center gap-3">
-            <FaRegCircleUser size={30} />
+            <Link to={'/prisijungimas'}>
+              <FaRegCircleUser size={30} />
+            </Link>
             <select defaultValue={i18n.language} onChange={onChangeLang}>
               {LANGUAGES.map((lang) => (
                 <option key={lang.code} value={lang.code}>
