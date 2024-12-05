@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+  .shadow-text {
+    @apply [text-shadow:1px_1px_2px_var(--tw-shadow-color)] shadow-slate-800;
+  }
+
   .sg-container {
     @apply max-w-[1440px] px-10 mx-auto;
   }

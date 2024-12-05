@@ -6,7 +6,7 @@ import { FaFacebook, FaInstagramSquare, FaYoutube } from 'react-icons/fa';
 import { Gallery } from '../shared/gallery/gallery';
 
 import logo from '/assets/skygym-logo-28.png';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 export const Footer = () => {
   const { t } = useTranslation();

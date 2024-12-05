@@ -1,8 +1,8 @@
-import { Link, NavLink } from 'react-router-dom';
 import { LANGUAGES } from '../../constants/languages';
 import { useTranslation } from 'react-i18next';
 import logo from '/assets/skygym-logo-88.png';
 import { FaRegCircleUser } from 'react-icons/fa6';
+import { Link, NavLink } from 'react-router';
 
 export const MainMenu = () => {
   const { i18n, t } = useTranslation();

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router';
 
 export const NotFoundPage = () => {
   const navigate = useNavigate();

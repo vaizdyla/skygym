@@ -6,7 +6,7 @@ export const ContactsPage = () => {
   const { t } = useTranslation();
   return (
     <main className="sg-container">
-      <PageTitle pageTitle={t('titleContacts')} />
+      <PageTitle>{t('titleContacts')}</PageTitle>
       <div className="grid md:grid-cols-3 md:gap-3 py-4">
         <ContactForm />
         <p className="test-class">
