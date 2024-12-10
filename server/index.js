@@ -12,6 +12,7 @@ const router = require('./router/router');
 // protingas komentaras
 const cors = require('cors');
 const cookieParser = require('cookie-parser'); // refreshToken saugosime cookies
+const errorsMiddleware = require('./middlewares/error.middleware');
 
 const app = express();
 
@@ -19,6 +20,9 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use('/api', router);
+
+// Klaidos prijungiamos VISADA PASKUTINĖS!!!
+app.use(errorsMiddleware);
 
 const startServer = async () => {
   try {
