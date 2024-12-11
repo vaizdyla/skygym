@@ -1,10 +1,10 @@
 const mailService = require('../service/mail.service');
 const tokenService = require('../service/token.service');
+const ApiError = require('../exceptions/api.errors');
 const { User } = require('../models/models');
+const UserDto = require('../dto/user.dto');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
-const UserDto = require('../dto/user.dto');
-const ApiError = require('../exceptions/api.errors');
 
 class UserService {
   async registration(first_name, email, password) {
@@ -47,19 +47,56 @@ class UserService {
 
   async login(email, password) {
     // Ar yra toks naudotojas (el. paštas)
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ where: { email } });
 
-    if (!user) throw ApiError('Naudotojo su tokiu el. pašto adresnu nėra');
+    if (!user) throw new ApiError('Naudotojo su tokiu el. pašto adresnu nėra');
 
     // Čia turi buti patikrinimas, ar naudotojas aktyvavo savo paskyrą
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    if (!isPasswordValid) throw ApiError('Neteisingas slaptažodis');
+    if (!isPasswordValid) throw new ApiError('Neteisingas slaptažodis');
 
     const userDto = new UserDto(user);
 
     const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveRefreshToken(userDto.id, tokens.refreshToken);
+
+    return { ...tokens, userDto };
+  }
+
+  /**
+   * Funkcija ištrina prisijungusio naudotojo refreshToken
+   * @param {*} refreshToken
+   * @returns kiek refreshToken ištrinta iš db
+   */
+  async logout(refreshToken) {
+    const token = await tokenService.removeToken(refreshToken);
+
+    return token;
+  }
+
+  async refresh(refreshToken) {
+    if (!refreshToken) throw new ApiError.UnauthorizedError();
+
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
+
+    if (!userData || !tokenFromDb) throw new ApiError.UnauthorizedError();
+
+    const user = await User.findOne({ where: { id: userData.id } });
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+
+    await tokenService.saveRefreshToken(userDto.id, tokens.refreshToken);
+
+    return { ...tokens, user: userDto };
+  }
+
+  async getAllUsers() {
+    const users = await User.findAll();
+
+    return users;
   }
 }
 

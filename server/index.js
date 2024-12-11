@@ -16,6 +16,7 @@ const errorsMiddleware = require('./middlewares/error.middleware');
 
 const app = express();
 
+// Middlewares visokios
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());

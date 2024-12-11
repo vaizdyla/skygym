@@ -42,15 +42,61 @@ class UserController {
     }
   }
 
+  /**
+   *
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns objektas: refreshToken, accessToken, userDto
+   */
   async login(req, res, next) {
     try {
-      const { email, password } = req.body();
+      const { email, password } = req.body;
       const userData = await userService.login(email, password);
       // refresh tokena saugome cookies
-      res.cookie('refreshToken', newUserInfo.refreshToken, {
+      res.cookie('refreshToken', userData.refreshToken, {
         maxAge: 24 * 60 * 60 * 1000, // 1 d.
         httpOnly: true,
       });
+
+      return res.json(userData);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  /**
+   *
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns skaičius, kiek tokenu ištrinta :)
+   *          reikia dar pasitikrinti
+   */
+  async logout(req, res, next) {
+    try {
+      const { refreshToken } = req.cookies;
+      const token = await userService.logout(refreshToken);
+      res.clearCookie('refreshToken');
+
+      return res.json(token);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async refresh(req, res, next) {
+    try {
+      const { refreshToken } = res.cookies('refreshToken');
+
+      const userData = await userService.refresh(refreshToken);
+      // refresh tokena saugome cookies
+      res.cookie('refreshToken', userData.refreshToken, {
+        maxAge: 24 * 60 * 60 * 1000, // 1 d.
+        httpOnly: true,
+      });
+
+      return res.json(userData);
     } catch (e) {
       next(e);
     }
@@ -58,7 +104,8 @@ class UserController {
 
   async getAllUsers(req, res, next) {
     try {
-      res.json(['viskas ok', 'kas toliau?']);
+      const users = await userService.getAllUsers();
+      return res.json(users);
     } catch (e) {
       next(e);
     }
