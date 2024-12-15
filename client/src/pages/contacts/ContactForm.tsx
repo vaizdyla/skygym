@@ -16,7 +16,9 @@ export const ContactForm = () => {
 
   const handleSubmit: SubmitHandler<z.infer<typeof ContactSchema>> = (
     formData
-  ) => {};
+  ) => {
+    console.log(formData);
+  };
 
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)}>

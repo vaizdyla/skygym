@@ -17,7 +17,14 @@ const errorsMiddleware = require('./middlewares/error.middleware');
 const app = express();
 
 // Middlewares visokios
-app.use(cors());
+app.use(
+  cors({
+    // Dėl slapukų
+    // turi būti nurodomas fronto URL !!!
+    credentials: true,
+    origin: process.env.CLIENT_URL,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use('/api', router);
